@@ -2,6 +2,8 @@ const User = require('../models/user');
 const multer=require('multer');
 const fs=require('fs');
 const path=require('path');
+const resetSchema=require('../models/reset-password-token');
+const crypto=require('crypto');
 // let's keep it same as before
 module.exports.profile = function(req, res){
     User.findById(req.params.id, function(err, user){
@@ -10,7 +12,7 @@ module.exports.profile = function(req, res){
             profile_user: user
         });
     });
-
+ 
 }
 
 
@@ -141,4 +143,60 @@ module.exports.destroySession = function(req, res){
 
 
     return res.redirect('/');
+}
+module.exports.forgotpassword=function(req,res)
+{
+    
+    return res.render('forgotpassword',{title:'Retrieve your password'});
+    
+}
+module.exports.retrieve=async function(req,res)
+{
+    try{
+        var email=req.body.email;
+        console.log(email);
+        token = crypto.randomBytes(32).toString('hex');
+        
+        let user=User.findOne({email:email});
+        console.log(user);
+        if(user)
+        {
+            
+            let accessSchema=resetSchema.create({
+                user:user,
+                token:token,
+                isvalid:true
+            });
+            accessSchema=(await accessSchema).populate('user');
+            return res.render('confirm-password',{title:"confirm password",user:user});
+        }
+        else
+        return res.redirect('back');
+        
+        
+        
+    }
+    catch(err)
+    {
+        console.log(err);
+        return res.redirect('back');
+    }
+
+}
+module.exports.changePassword=function(req,res)
+{
+var p1=req.body.p1;
+var p2=req.body.p2;
+if(p1!=p2)
+return res.redirect('/users/sign-in');
+User.findByIdAndUpdate(req.params.id,function(err,user){
+if(err)
+{
+    console.log(err);return;
+}
+user.password=p1;
+return res.redirect('/users/sign-in');
+
+});
+
 }

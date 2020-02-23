@@ -1,14 +1,24 @@
 <link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <div id="home-container">
     <section id="feed-posts">
-            <h4>Posts</h4>
+            <!-- <h4>Posts</h4> -->
             <% if(locals.user){ %>
-            <form action="/posts/create" id="new-post-form" method="POST">
-                <textarea name="content" cols="30" rows="3" placeholder="Type Here..." required></textarea>
-                <input type="submit" value="Post">
-            </form>
-            <% } %>
+                <div id="firstdiv">
+                   <div id="userspic">
+                    <!-- Write something here... -->
+            <img src="<%=user.avatar%>" alt="mypic">
+                     
+                   </div>
+
+                    <form action="/posts/create" id="new-post-form" method="POST">
+                        <textarea name="content" cols="59" rows="3" placeholder="Type Here..." required id="textinput" ></textarea>
+                        <input type="submit" value="Post" class="btn btn-dark firstbtn">
+                    </form>
+                    <% } %>
+                </div>
+            
         
             <div id="posts-list-container">
                 <ul>
