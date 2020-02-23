@@ -8,31 +8,3 @@
     padding: 10px;
     border-left: 1px solid lightgrey;
     height: 100%; }
-#userspic img{
-  height:100px;
-  width:100px;
-  border-radius: 50%;
-  
-}
-textarea{
-  border: 1px solid  lightgrey;
-  position: absolute;
-  top: 10%;
-  left:10%;
-}
-.firstbtn{
-  position: absolute;
-  top:12%;
-  left:34%;
-}
-#posts-list-container{
-  height:80vh;
-  width:60%;
-  overflow: scroll;
-}
-::-webkit-scrollbar{
-  visibility: hidden;
-}
-input.middle:focus {
-  outline-width: 0;
-}
