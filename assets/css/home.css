@@ -12,6 +12,7 @@
   height:100px;
   width:100px;
   border-radius: 50%;
+  
 }
 textarea{
   border: 1px solid  lightgrey;
@@ -31,4 +32,7 @@ textarea{
 }
 ::-webkit-scrollbar{
   visibility: hidden;
+}
+input.middle:focus {
+  outline-width: 0;
 }
